@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProductList } from "../shared/product-list/product-list";
 import { IProduct } from '../shared/models/product.interface';
+import { ProductApi } from '../shared/service/product-api/product-api';
 
 @Component({
   selector: 'app-items-list',
@@ -13,8 +14,9 @@ import { IProduct } from '../shared/models/product.interface';
 })
 export class ItemsList {
   data!:Observable<IProduct[]>;
-  constructor(private http:HttpClient){
-    this.data= this.http.get<IProduct[]>('https://fakestoreapi.com/products');
-    console.log(this.data);
+  constructor(private productApi:ProductApi, private http:HttpClient){
+    this.http.get<IProduct>('https://fakestoreapi.com/products').subscribe(val=>console.log(val));
+    this.data= productApi.getproducts();
   }
+
 }
