@@ -1,5 +1,14 @@
-<div class="grid grid-cols-4 gap-4">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <!-- Header -->
+  <div class="mb-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Featured Products</h1>
+    <p class="text-lg text-slate-600">Discover our curated collection of premium items</p>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     @for (item of data|async; track $index) {
-        <app-product-list [productData]="item"/>
+      <app-product-list [productData]="item" (handleAddToCart)="addItem($event)"/>
     }
+  </div>
 </div>

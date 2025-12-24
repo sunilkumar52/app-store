@@ -1,33 +1,43 @@
-<nav class="block w-full max-w-screen-lg px-4 py-2 mx-auto bg-white shadow-md rounded-md lg:px-8 lg:py-3 mt-10">
-  <div class="container flex flex-wrap items-center justify-between mx-auto text-slate-800">
-    <a href="#" class="mr-4 block cursor-pointer py-1.5 text-base text-slate-800 font-semibold">
-      Store
-    </a>
- 
-    <div class="hidden lg:block">
-      <ul class="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-        
-        <li routerLink="/cart"
-        class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-</svg>
+<!-- Modern Header -->
+<header class="sticky top-0 z-50 w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6 text-white">
+            <path d="M3 3h2l.4 2H20a1 1 0 0 1 1 1.22l-1.884 9A1 1 0 0 1 18.118 16H9a1 1 0 0 0 0 2h9a3 3 0 0 0 0-6h-.35l.35-2h-2.91l-.9 4.5M9 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+          </svg>
+        </div>
+        <a href="/" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">StoreHub</a>
+      </div>
 
- 
-          <a  class="flex items-center">
-            cart
-          </a>
-        </li>
-      </ul>
-    </div>
-    <button class="relative ml-auto h-6 max-h-[40px] w-6 max-w-[40px] select-none rounded-lg text-center align-middle text-xs font-medium uppercase text-inherit transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:hidden" type="button">
-      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">Home</a>
+        <a href="/" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">Products</a>
+      </div>
+
+      <!-- Cart Icon -->
+      <button routerLink="/cart" class="relative flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 transform hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
         </svg>
-      </span>
-    </button>
-  </div>
-</nav>
-<br/>
-<router-outlet/>
+        <span class="font-semibold">Cart</span>
+        @if ((cartItems$|async)?.length) {
+          <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">{{(cartItems$|async)?.length}}</span>
+        }
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Main Content -->
+<main class="min-h-screen bg-gradient-to-b from-slate-50 via-slate-100 to-slate-50 pt-8 pb-12">
+  <router-outlet/>
+</main>
+<!-- @for(item of cartItems$|async; track $index){
+  <h1>
+    {{item.title}}
+  </h1>
+} -->

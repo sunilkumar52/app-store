@@ -1,20 +1,47 @@
-<div class="max-w-sm rounded overflow-hidden shadow-lg">
-  <img width="200" class="block mx-auto" src="{{productData.image}}" alt="Sunset in the mountains">
-  <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2">{{productData.title}}</div>
-    <p class="text-gray-700 text-base">
-      {{productData.description.substring(0,100)}}...
-    </p>
+<div class="group h-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden flex flex-col">
+  <!-- Image Container -->
+  <div class="relative h-48 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center overflow-hidden">
+    <img class="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500" src="{{productData.image}}" alt="{{productData.title}}">
   </div>
-  <div class="px-6 pt-4 pb-2">
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{productData.price|currency}}</span>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Ratings:{{productData.rating.rate}}</span>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Catagory:{{productData.category}}</span>
-    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-  Add to cart
-</button>
-<button class="rounded-md bg-red-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button">
-  View Product
-</button>
+
+  <!-- Content -->
+  <div class="p-5 flex flex-col flex-grow">
+    <!-- Category Badge -->
+    <div class="mb-3">
+      <span class="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">{{productData.category}}</span>
+    </div>
+
+    <!-- Title -->
+    <h3 class="text-lg font-bold text-slate-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">{{productData.title}}</h3>
+
+    <!-- Description -->
+    <p class="text-sm text-slate-600 mb-4 line-clamp-2 flex-grow">{{productData.description.substring(0,80)}}...</p>
+
+    <!-- Rating and Price Row -->
+    <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-200">
+      <div class="flex items-center gap-1">
+        <div class="flex text-yellow-400">
+          @for (i of [1,2,3,4,5]; track i) {
+            @if (i <= Math.ceil(productData.rating.rate)) {
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            } @else {
+              <svg class="w-4 h-4 fill-slate-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            }
+          }
+        </div>
+        <span class="text-sm font-semibold text-slate-700">{{productData.rating.rate}}</span>
+      </div>
+      <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{{productData.price|currency}}</span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex gap-2">
+      <button (click)='addToCart()' class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg">
+        Add to Cart
+      </button>
+      <button class="flex-1 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 font-bold py-2 px-4 rounded-lg transition-all duration-200">
+        View
+      </button>
+    </div>
   </div>
 </div>
