@@ -8,7 +8,7 @@ export const selectCartItems = createSelector(
 )
 export const selectTotalPrice= createSelector(
     selectCartState,
-    (state:CartState)=>{
-        return state.totalPrice;
-    }
+    (state:CartState)=>(
+         state.totalPrice
+    )
 )

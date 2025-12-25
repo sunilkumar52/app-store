@@ -7,8 +7,15 @@
 
   <!-- Product Grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    @for (item of data|async; track $index) {
-      <app-product-list [productData]="item" (handleAddToCart)="addItem($event)"/>
+    @if (error|async) {
+      <h1 class="text-4xl dark:text-black">
+        something went wrong while loading product
+      </h1>
+    }
+    @else{
+      @for (item of data|async; track $index) {
+        <app-product-list [productData]="item" (handleAddToCart)="addItem($event)"/>
+      }
     }
   </div>
 </div>
